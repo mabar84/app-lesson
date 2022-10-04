@@ -1,0 +1,30 @@
+.navbar {
+  padding: 1vh 1vw;
+  background: yellow;
+  grid-area: n;
+}
+
+.item {
+  display: block;
+  color: blue;
+  text-decoration: none;
+}
+
+.item:hover {
+  opacity: 0.5;
+}
+
+.active {
+  text-decoration: none;
+  color: red;
+}
+
+.active:hover {
+  opacity: 0.5;
+}
+
+.bestFriends {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,19 @@
+.bestFriends {
+  /* cursor: pointer; */
+  /* background: orange; */
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+.bestFriends img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50% 0 50% 0;
+}
+.item {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
