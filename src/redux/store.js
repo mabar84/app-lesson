@@ -41,7 +41,7 @@ let store = {
         },
       ],
       messagesData: [
-        { id: 1, message: "Hi" },
+        { id: 1, message: "Hi123213123412312" },
         { id: 2, message: "How are you?" },
         { id: 3, message: "Yo" },
         { id: 4, message: "Yo-yo!!!" },
@@ -124,6 +124,6 @@ let store = {
   },
 };
 
-window.store = store;
-
 export default store;
+
+window.store = store;

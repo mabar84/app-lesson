@@ -1,43 +1,46 @@
 import React from "react";
-import {
-  addMessageActionCreator,
-  updateNewMessageTextActionCreator,
-} from "../../redux/dialogs-reducer";
+import {  sendMessageCreator} from "../../redux/dialogs-reducer";
 import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Messages from "./Messages/Messages";
 
 const Dialogs = (props) => {
-  let messages = props.dialogsPage.messagesData.map((m) => (
-    <Messages message={m.message} id={m.id} />
+
+  let state = props.dialogsPage
+
+  console.log(state)
+
+  let messages = state.messagesData.map((m,index) => (
+    <Messages message={m.message} id={m.id} key={index} />
   ));
 
   // let newMessage = React.createRef();
 
-  let addMessage = () => {
+  let onSendMessageClick = () => {
     // let text = newMessage.current.value;
-    let text = props.dialogsPage.newMessageText;
+    // let text = props.addMessage()
 
-    if (text === "") {
-      console.log("Дык пусто");
-    } else {
-      // props.addMessage();
-      props.dispatch(addMessageActionCreator());
-    }
+    props.sendMessage()
+
+    // if (text === "") {
+    //   console.log("Пусто");
+    // } else {
+    //   // props.addMessage();
+    //   props.dispatch(sendMessageCreator());
+    // }
   };
 
-  let onMessageChange = (e) => {
-    let text = e.target.value;
-    // props.updateNewMessageText(text);
-    let action = updateNewMessageTextActionCreator(text);
+  let onNewMessageChange = (e) => {
+    let body = e.target.value;
+    console.log(body)
+    props.updateNewMessageBody(body)
 
-    props.dispatch(action);
   };
 
   return (
     <div className={s.dialogs}>
       <div className={s.names}>
-        <DialogsItem dialogsData={props.dialogsPage.dialogsData} />
+        <DialogsItem dialogsData={state.dialogsData} />
       </div>
 
       <div className={s.messages}>
@@ -45,16 +48,16 @@ const Dialogs = (props) => {
         <div>
           <div className="">
             <textarea
-              value={props.dialogsPage.newMessageText}
+              value={state.newMessageText}
               // ref={newMessage}
               cols="30"
               rows="10"
               className="textarea"
-              onChange={onMessageChange}
+              onChange={onNewMessageChange}
             ></textarea>
           </div>
           <div>
-            <button className="button" onClick={addMessage}>
+            <button className="button" onClick={onSendMessageClick}>
               Отправить
             </button>
           </div>

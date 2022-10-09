@@ -3,8 +3,9 @@ import BestFriends from "../Friends/BestFriends/BestFriends";
 import s from "./Navbar.module.css";
 
 const Navbar = (props) => {
-  let bestFriends = props.state.friendsData.map((f) => (
-    <BestFriends id={f.id} name={f.name} src={f.src} />
+
+  let bestFriends = props.store.sidebar.friendsData.map((f) => (
+    <BestFriends id={f.id} name={f.name} src={f.src} key={f.id} />
   ));
 
   return (

@@ -7,40 +7,35 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-  let posts = props.profilePage.posts.map((p) => (
-    <Post message={p.message} like={p.like} id={p.id} />
+
+  let posts = props.posts.map((p,index) => (
+    <Post message={p.message} like={p.like} id={p.id} key={index} />
   ));
 
   let newPostElement = React.createRef();
 
-  let addPost = () => {
-    // let text = newPostElement.current.value;
-    // if (!text == "") {
-    // props.addPost();
-    props.dispatch(addPostActionCreator());
-    // }
+  let onAddPost = () => {
+     props.addPost();
   };
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    // props.updateNewPostText(text);
-
-    let action = updateNewPostTextActionCreator(text);
-    props.dispatch(action);
+    props.updateNewPostText(text);
   };
+
   return (
     <div className={s.MyPosts}>
       <h3>My posts</h3>
       <div>
         <textarea
-          value={props.profilePage.newPostText}
+          value={props.newPostText}
           ref={newPostElement}
           className="textarea"
           onChange={onPostChange}
         />
       </div>
       <div>
-        <button onClick={addPost} className="button">
+        <button onClick={onAddPost} className="button">
           Add post
         </button>
       </div>
