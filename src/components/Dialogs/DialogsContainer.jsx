@@ -6,8 +6,7 @@ import Dialogs from "./Dialogs";
 
 const DialogsContainer = (props) => {
 
-  //let state=props.store.getState().dialogsPage
-  let state=props.store.dialogsPage
+  let state=props.store.getState().dialogsPage
 
   let onSendMessageClick = () => {
     let text = state.newMessageText;
@@ -20,7 +19,6 @@ const DialogsContainer = (props) => {
   };
 
   let onNewMessageChange = (body) => {
-    console.log("Изменения?!")
     props.store.dispatch(updateNewMessageCreator(body));
   };
 

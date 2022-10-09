@@ -18,19 +18,19 @@ const App = (props:any) => {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
-                <Navbar store={props.state}  />
+                <Navbar store={props.store}  />
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route
                             path="/profile"
                             element={
-                                <Profile store={props.state} />
+                                <Profile store={props.store} />
                             }
                         />
                         <Route
                             path="/dialogs"
                             element={
-                                <DialogsContainer store={props.state} />
+                                <DialogsContainer store={props.store} />
                             }
                         />
                         <Route path="/news" element={<News />} />

@@ -1,5 +1,4 @@
 import React from "react";
-import {  sendMessageCreator} from "../../redux/dialogs-reducer";
 import s from "./Dialogs.module.css";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import Messages from "./Messages/Messages";
@@ -8,33 +7,17 @@ const Dialogs = (props) => {
 
   let state = props.dialogsPage
 
-  console.log(state)
-
   let messages = state.messagesData.map((m,index) => (
     <Messages message={m.message} id={m.id} key={index} />
   ));
 
-  // let newMessage = React.createRef();
-
   let onSendMessageClick = () => {
-    // let text = newMessage.current.value;
-    // let text = props.addMessage()
-
     props.sendMessage()
-
-    // if (text === "") {
-    //   console.log("Пусто");
-    // } else {
-    //   // props.addMessage();
-    //   props.dispatch(sendMessageCreator());
-    // }
   };
 
   let onNewMessageChange = (e) => {
     let body = e.target.value;
-    console.log(body)
-    props.updateNewMessageBody(body)
-
+    props.updateNewMessageBody(body);
   };
 
   return (

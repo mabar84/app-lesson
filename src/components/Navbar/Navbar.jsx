@@ -4,7 +4,7 @@ import s from "./Navbar.module.css";
 
 const Navbar = (props) => {
 
-  let bestFriends = props.store.sidebar.friendsData.map((f) => (
+  let bestFriends = props.store.getState().sidebar.friendsData.map((f) => (
     <BestFriends id={f.id} name={f.name} src={f.src} key={f.id} />
   ));
 
