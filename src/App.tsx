@@ -12,25 +12,23 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 const App = (props:any) => {
 
-
-
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header />
-                <Navbar store={props.store}  />
+                <Navbar store={props.store} />
                 <div className="app-wrapper-content">
                     <Routes>
                         <Route
                             path="/profile"
                             element={
-                                <Profile store={props.store} />
+                                <Profile  />
                             }
                         />
                         <Route
                             path="/dialogs"
                             element={
-                                <DialogsContainer store={props.store} />
+                                <DialogsContainer  />
                             }
                         />
                         <Route path="/news" element={<News />} />
