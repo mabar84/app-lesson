@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-let rerenderEntireTree = (state: any) => {
+// let rerenderEntireTree = (state: any) => {
 
     root.render(
         <React.StrictMode>
@@ -19,14 +19,14 @@ let rerenderEntireTree = (state: any) => {
             </Provider>
         </React.StrictMode>
     );
-};
+// };
 
-rerenderEntireTree(store.getState());
-
-store.subscribe(() => {
-    let state = store.getState()
-    rerenderEntireTree(state)
-});
+// rerenderEntireTree(store.getState());
+//
+// store.subscribe(() => {
+//     let state = store.getState()
+//     rerenderEntireTree(state)
+// });
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
