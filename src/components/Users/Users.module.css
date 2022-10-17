@@ -11,3 +11,12 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+.selectedPage {
+    color: coral;
+    font-weight: bold;
+}
+
+.cupo {
+    cursor: pointer;
+}
