@@ -1,101 +1,52 @@
 import React from "react";
 import s from "./Users.module.css";
-import axios from "axios";
-import userPhoto from '../../../src/assets/img/small.png'
+import userPhoto from "../../assets/img/small.png";
 
-class Users extends React.Component {
+let Users = (props) => {
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-            })
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
     }
 
-    onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items)
-            })
-    }
-
-    render() {
-
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-        const pages = []
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i)
-        }
-
-        return <div>
-            <div>
-                {pages.map(p => {
-                    return <React.Fragment key={p}>
-                    <span className={`${s.cupo} ${this.props.currentPage === p ? s.selectedPage : ''}`}
+    return <div>
+        <div>
+            {pages.map(p => {
+                return <React.Fragment key={p}>
+                    <span className={`${s.cupo} ${props.currentPage === p ? s.selectedPage : ''}`}
                           onClick={
-                              (e) => {
-                                  this.onPageChanged(p)
+                              () => {
+                                  props.onPageChanged(p)
                               }
                           }
                     >{p}</span>
-                        <span> </span>
-                    </React.Fragment>
-                })}
-            </div>
-            {
-                this.props.users.map((u, index) => <div className={s.user} key={index}>
-                    <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}
-                         alt={"avatar"}/>
-                    <div>
-                        {u.followed
-                            ? <button onClick={() => {
-                                this.props.unfollow(u.id)
-                            }}>Unfollow</button>
-                            : <button onClick={() => {
-                                this.props.follow(u.id)
-                            }}>Follow</button>
-                        }
-                    </div>
-                    <p>{u.name}</p>
-
-                    {/*<p>{u.status}</p>*/}
-                    <p>{'u.location.city'}</p>
-                    <p>{'u.location.country'}</p>
-                </div>)
-            }
+                    <span> </span>
+                </React.Fragment>
+            })}
         </div>
-    }
+        {
+            props.users.map((u, index) => <div className={s.user} key={index}>
+                <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}
+                     alt={"avatar"}/>
+                <div>
+                    {u.followed
+                        ? <button onClick={() => {
+                            props.unfollow(u.id)
+                        }}>Unfollow</button>
+                        : <button onClick={() => {
+                            props.follow(u.id)
+                        }}>Follow</button>
+                    }
+                </div>
+                <p>{u.name}</p>
 
+                {/*<p>{u.status}</p>*/}
+                <p>{'u.location.city'}</p>
+                <p>{'u.location.country'}</p>
+            </div>)
+        }
+    </div>
 }
 
-export default Users;
-
-//
-// [
-//     {
-//         id: 1,
-//         followed: false,
-//         fullName: "Dmitry",
-//         photoURL: 'https://i.pinimg.com/236x/9b/cf/90/9bcf904ef8bfe82dceaf70a8fde3725f--fasion-avatar.jpg',
-//         status: 'My cool status',
-//         location: {country: 'Belarus', city: 'Minsk'}
-//     },
-//     {
-//         id: 2,
-//         followed: true,
-//         fullName: "Robot",
-//         photoURL: 'https://i.pinimg.com/236x/9b/cf/90/9bcf904ef8bfe82dceaf70a8fde3725f--fasion-avatar.jpg',
-//         status: 'Who am i?',
-//         location: {country: 'Narniya', city: 'Luna'}
-//     },
-//     {
-//         id: 3,
-//         followed: false,
-//         fullName: "Gena",
-//         photoURL: 'https://i.pinimg.com/236x/9b/cf/90/9bcf904ef8bfe82dceaf70a8fde3725f--fasion-avatar.jpg',
-//         status: 'Kshe psheno',
-//         location: {country: 'Poland', city: 'Krakov'}
-//     }
-// ]
+export default Users
