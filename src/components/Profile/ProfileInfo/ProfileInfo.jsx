@@ -1,7 +1,10 @@
 import s from "./ProfileInfo.module.css";
+import {Preloader} from "../../common/Preloader";
 
 const ProfileInfo = (props) => {
-    console.log(props.profile)
+    if (!props.profile) {
+        return <Preloader/>
+    }
     return (
         <div>
             <img
