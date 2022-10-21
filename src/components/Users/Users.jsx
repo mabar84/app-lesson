@@ -57,8 +57,6 @@ let Users = (props) => {
                                         props.follow(u.id)
                                     }
                                 })
-
-
                         }}>Follow</button>
                     }
                 </div>
