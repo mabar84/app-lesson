@@ -33,9 +33,14 @@ let Users = (props) => {
                     <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}
                          alt={"avatar"}/>
                 </NavLink>
+
                 <div>
                     {u.followed
-                        ? <button onClick={() => {
+                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+
+                            props.toggleFollowingProgress(true, u.id)
+
+
                             axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                 withCredentials: true,
                                 headers: {'API-KEY': '913ce367-8c9f-4b2c-b37a-28fb1036005b'}
@@ -44,9 +49,15 @@ let Users = (props) => {
                                     if (response.data.resultCode === 0) {
                                         props.unfollow(u.id)
                                     }
+
+                                    props.toggleFollowingProgress(false, u.id)
                                 })
                         }}>Unfollow</button>
-                        : <button onClick={() => {
+                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+
+
+                            props.toggleFollowingProgress(true, u.id)
+
 
                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                 withCredentials: true,
@@ -56,6 +67,7 @@ let Users = (props) => {
                                     if (response.data.resultCode === 0) {
                                         props.follow(u.id)
                                     }
+                                    props.toggleFollowingProgress(false, u.id)
                                 })
                         }}>Follow</button>
                     }
