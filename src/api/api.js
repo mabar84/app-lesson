@@ -12,7 +12,7 @@ export const usersAPI = {
             .then(response => response.data)
     },
     getProfile(profileId = 2) {
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${profileId}`)
+        return instance.get(`profile/${profileId}`)
             .then(response => response.data)
     },
     follow(userId) {
@@ -20,9 +20,11 @@ export const usersAPI = {
     },
     unfollow(userId) {
         return instance.delete(`follow/${userId}`)
-    },
-    getAuthData() {
-        console.log('pros get')
+    }
+}
+
+export const authAPI = {
+    me() {
         return instance.get(`auth/me`)
             .then(response => response.data)
     }
