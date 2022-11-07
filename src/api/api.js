@@ -11,16 +11,32 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
-    getProfile(profileId = 2) {
-        return instance.get(`profile/${profileId}`)
-            .then(response => response.data)
-    },
     follow(userId) {
         return instance.post(`follow/${userId}`)
     },
     unfollow(userId) {
         return instance.delete(`follow/${userId}`)
+    },
+    getProfile(userId = 2) {
+        console.warn('Obsolete method. Please, use profile object')
+        return profileAPI.getProfile(userId)
     }
+}
+
+export const profileAPI = {
+    getProfile(userId = 2) {
+        return instance.get(`profile/${userId}`)
+            .then(response => response.data)
+    },
+    getUserStatus(userId = 2) {
+        return instance.get(`profile/status/${userId}`)
+            .then(response => response.data)
+    },
+    updateUserStatus(status) {
+        console.log('Go to update')
+        return instance.put(`profile/status/`, {status: status})
+            .then(response => response.data)
+    },
 }
 
 export const authAPI = {
