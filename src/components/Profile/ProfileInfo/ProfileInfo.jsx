@@ -3,7 +3,8 @@ import {Preloader} from "../../common/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
-    if (!props.profile || !props.status) {
+    if (!props.profile ) {
+    // if (!props.profile || !props.status) {
         return <Preloader/>
     }
     return (

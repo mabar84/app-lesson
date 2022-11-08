@@ -1,4 +1,4 @@
-import {Component} from "react";
+import {Component} from 'react';
 
 
 class ProfileStatus extends Component {
@@ -31,7 +31,22 @@ class ProfileStatus extends Component {
         })
     }
 
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+        // debugger
+        // console.log('prevProps=',prevProps)
+        // console.log('prevState=',prevState)
+        // console.log('this.state=',this.state)
+        // console.log('this.props=',this.props)
+    }
+
     render() {
+        console.log('render')
         return (
             <div>
                 {!this.state.editMode &&
