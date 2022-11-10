@@ -1,8 +1,10 @@
-import React from "react";
-import s from "./Dialogs.module.css";
-import DialogsItem from "./DialogsItem/DialogsItem";
-import Messages from "./Messages/Messages";
-import {Navigate} from "react-router-dom";
+import React from 'react';
+import s from './Dialogs.module.css';
+import DialogsItem from './DialogsItem/DialogsItem';
+import Messages from './Messages/Messages';
+import {Navigate} from 'react-router-dom';
+import handleSubmit from 'redux-form/lib/handleSubmit';
+import {Field, reduxForm} from 'redux-form';
 
 const Dialogs = (props) => {
 
@@ -12,13 +14,9 @@ const Dialogs = (props) => {
         <Messages message={m.message} id={m.id} key={index}/>
     ));
 
-    let onSendMessageClick = () => {
-        props.sendMessage()
-    };
-
-    let onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
+    const onSubmit = (values) => {
+        props.sendMessage(values.newMessage)
+        values.newMessage = ''
     };
 
     if (!props.isAuth) return <Navigate to={'/login'}/>
@@ -31,26 +29,24 @@ const Dialogs = (props) => {
 
             <div className={s.messages}>
                 {messages}
-                <div>
-                    <div className="">
-            <textarea
-                value={state.newMessageText}
-                // ref={newMessage}
-                cols="30"
-                rows="10"
-                className="textarea"
-                onChange={onNewMessageChange}
-            ></textarea>
-                    </div>
-                    <div>
-                        <button className="button" onClick={onSendMessageClick}>
-                            Отправить
-                        </button>
-                    </div>
-                </div>
+                <DialogsForm onSubmit={onSubmit}/>
             </div>
         </div>
     );
 };
+
+let DialogsForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field component={'textarea'} name={'newMessage'} cols="30" rows="10" className="textarea"/>
+            <div>
+                <button className="button">
+                    Отправить
+                </button>
+            </div>
+        </form>)
+}
+
+DialogsForm = reduxForm({form: 'newMessageForm'})(DialogsForm)
 
 export default Dialogs;

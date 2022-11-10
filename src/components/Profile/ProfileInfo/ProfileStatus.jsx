@@ -1,6 +1,5 @@
 import {Component} from 'react';
 
-
 class ProfileStatus extends Component {
 
     state = {
@@ -38,15 +37,9 @@ class ProfileStatus extends Component {
                 status: this.props.status
             })
         }
-        // debugger
-        // console.log('prevProps=',prevProps)
-        // console.log('prevState=',prevState)
-        // console.log('this.state=',this.state)
-        // console.log('this.props=',this.props)
     }
 
     render() {
-        console.log('render')
         return (
             <div>
                 {!this.state.editMode &&
