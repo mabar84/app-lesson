@@ -1,4 +1,4 @@
-import preloader from "../../assets/img/preloader.gif";
+import preloader from "../../../assets/img/preloader.gif";
 import React from "react";
 import s from './Preloader.module.css'
 

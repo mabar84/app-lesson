@@ -3,8 +3,9 @@ import s from './Dialogs.module.css';
 import DialogsItem from './DialogsItem/DialogsItem';
 import Messages from './Messages/Messages';
 import {Navigate} from 'react-router-dom';
-import handleSubmit from 'redux-form/lib/handleSubmit';
 import {Field, reduxForm} from 'redux-form';
+import {FormField} from '../common/FormsControls/FormsControls';
+import {maxLengthCreator, required} from '../../utilites/validators/validators';
 
 const Dialogs = (props) => {
 
@@ -35,10 +36,14 @@ const Dialogs = (props) => {
     );
 };
 
+const maxLength = maxLengthCreator(8)
+
 let DialogsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={'textarea'} name={'newMessage'} cols="30" rows="10" className="textarea"/>
+            <Field elem={'textarea'} component={FormField} placeholder={'your message'} cols="30" rows="10"
+                   name={'newMessage'} validate={[required, maxLength]}
+            />
             <div>
                 <button className="button">
                     Отправить
