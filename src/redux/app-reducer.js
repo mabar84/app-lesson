@@ -21,8 +21,6 @@ const appReducer = (state = initialState, action) => {
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
 
 export const initializeApp = () => (dispatch) => {
-    console.log(localStorage.getItem('age'))
-
     let promise = dispatch(getAuthUserData())
     Promise.all([promise]).then(() => {
         dispatch(initializedSuccess())
