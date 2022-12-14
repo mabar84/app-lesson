@@ -1,12 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {
-    follow, getUsersThunk, toggleFollowingProgress, unfollow
-} from '../../redux/users-reducer';
+import {follow, getUsersThunk, toggleFollowingProgress, unfollow} from '../../redux/users-reducer';
 import Users from './Users';
-import {Preloader} from "../common/Preloader/Preloader";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {compose} from "redux";
+import {Preloader} from '../common/Preloader/Preloader';
+import {compose} from 'redux';
 import {
     getCurrentPage,
     getFollowingInProgress,
@@ -27,6 +24,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
+        console.log('RENDER USERS')
         return <>
             {this.props.isFetching && <Preloader/>}
             <Users totalUsersCount={this.props.totalUsersCount}
@@ -43,7 +41,9 @@ class UsersContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log('MSTP USERS')
     return {
+        // users: getUsers(state),
         users: getUsers(state),
         pageSize: getpageSize(state),
         totalUsersCount: getTotalUsersCount(state),

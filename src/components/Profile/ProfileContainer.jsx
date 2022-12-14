@@ -8,7 +8,6 @@ import {withNavigate} from '../../hoc/withNavigate';
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        console.log(this.props)
         let userId = this.props.router.params.id;
 
         if (!userId) {
@@ -20,12 +19,10 @@ class ProfileContainer extends React.Component {
 
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
-
-        // setTimeout(() => {
-        // }, 2000)
     }
 
     render() {
+        console.log('RENDER PROFILE')
             return (
                 <Profile {...this.props} profile={this.props.profile} status={this.props.status}
                          updateUserStatus={this.props.updateUserStatus}/>
@@ -33,12 +30,15 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorizedUserId:state.auth.id,
-    isAuth: state.auth.isAuth
-})
+let mapStateToProps = (state) => {
+    console.log('mapStateToProps PROFILE')
+    return ({
+        profile: state.profilePage.profile,
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isAuth: state.auth.isAuth
+    })
+}
 
 export default compose(
     connect(mapStateToProps,

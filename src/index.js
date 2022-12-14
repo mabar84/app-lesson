@@ -7,8 +7,12 @@ import App from "./App";
 import {Provider} from "react-redux";
 
 const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
+    document.getElementById('root')
 );
+
+setInterval(()=>{
+    store.dispatch({type:'!!!'})
+},1000);
 
 // let rerenderEntireTree = (state: any) => {
 
