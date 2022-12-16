@@ -17,11 +17,11 @@ const root = ReactDOM.createRoot(
 // let rerenderEntireTree = (state: any) => {
 
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App store={store}/>
-        </Provider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <Provider store={store}>
+        <App store={store}/>
+    </Provider>
+    // </React.StrictMode>
 );
 // };
 
