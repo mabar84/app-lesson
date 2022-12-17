@@ -1,12 +1,12 @@
 import {usersAPI} from '../api/api';
 
-const FOLLOW = "FOLLOW"
-const UNFOLLOW = "UNFOLLOW"
-const SET_USERS = "SET_USERS"
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
-const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
-const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
+const FOLLOW = 'FOLLOW'
+const UNFOLLOW = 'UNFOLLOW'
+const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 
 let initialState = {
@@ -16,14 +16,15 @@ let initialState = {
     currentPage: 1,
     isFetching: true,
     followingInProgress: [],
-    fake:10
+    fake: 10
 }
 
 const usersReducer = (state = initialState, action) => {
 
     switch (action.type) {
+        case '!!!':
+            return {...state, fake: state.fake + 1}
         case FOLLOW:
-        case '!!!':return {...state,fake:state.fake+1}
             return {
                 ...state,
                 users: state.users.map(u => {

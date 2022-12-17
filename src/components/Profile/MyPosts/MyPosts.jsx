@@ -5,7 +5,7 @@ import {Field, reduxForm} from 'redux-form';
 import {maxLengthCreator, required} from '../../../utilites/validators/validators';
 import {FormField} from '../../common/FormsControls/FormsControls';
 
-const MyPosts = (props) => {
+let  MyPosts=React.memo(props=> {
 
     const onSubmit = (values) => {
         values.myPostsTextarea && props.addPost(values.myPostsTextarea)
@@ -23,11 +23,14 @@ const MyPosts = (props) => {
             {posts}
         </div>
     );
-};
+})
 
 const maxLength = maxLengthCreator(10)
 
-let MyPostsForm = (props) => {
+let MyPostsForm = React.memo( props => {
+
+    console.log('RENDER MyPosts FORM')
+
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field elem={'textarea'} component={FormField} placeholder={'your post'}
@@ -40,7 +43,7 @@ let MyPostsForm = (props) => {
             </button>
         </div>
     </form>
-}
+});
 
 MyPostsForm = reduxForm({form: 'myPosts'})(MyPostsForm)
 
