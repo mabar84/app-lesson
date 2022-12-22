@@ -16,10 +16,6 @@ export const usersAPI = {
     },
     unfollow(userId) {
         return instance.delete(`follow/${userId}`)
-    },
-    getProfile(userId = 2) {
-        console.warn('Obsolete method. Please, use profile object')
-        return profileAPI.getProfile(userId)
     }
 }
 
@@ -44,7 +40,7 @@ export const authAPI = {
         return instance.get(`auth/me`)
             .then(response => response.data)
     },
-    login(email, password, rememberMe=false) {
+    login(email, password, rememberMe = false) {
         return instance.post(`auth/login`, {email, password, rememberMe})
             .then(response => response.data)
     },
