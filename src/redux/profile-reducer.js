@@ -1,9 +1,5 @@
 import {profileAPI} from '../api/api';
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-
 let initialState = {
     posts: [
         {id: 1, message: 'Hi, world!', like: 58},
@@ -17,31 +13,29 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case ADD_POST:
+        case 'ADD_POST':
             return {
                 ...state,
                 posts: [{id: 4, message: action.newPost, like: 11}, ...state.posts]
             }
-        case SET_USER_PROFILE:
+        case 'DELETE_POST':
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id !== action.id)
+            }
+        case 'SET_USER_PROFILE':
             return {...state, profile: action.profile}
-        case SET_STATUS:
+        case 'SET_STATUS':
             return {...state, status: action.status}
         default:
             return state;
     }
 };
 
-export const addPostActionCreator = (newPost) => ({type: ADD_POST, newPost});
-
-export const setUserProfile = (profile) => ({
-    type: SET_USER_PROFILE,
-    profile
-});
-
-export const setUserStatus = (status) => ({
-    type: SET_STATUS,
-    status
-});
+export const addPostActionCreator = (newPost) => ({type: 'ADD_POST', newPost});
+export const deletePostActionCreator = (id) => ({type: 'DELETE_POST', id});
+export const setUserProfile = (profile) => ({type: 'SET_USER_PROFILE', profile});
+export const setUserStatus = (status) => ({type: 'SET_STATUS', status});
 
 export const getUserProfile = (profileId) => {
     return (dispatch) => {

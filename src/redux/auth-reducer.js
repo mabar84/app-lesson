@@ -30,7 +30,7 @@ export const setAuthUserData = (id, email, login, isAuth) => ({
 })
 
 export const getAuthUserData = () => (dispatch) => {
-   return  authAPI.me()
+    return authAPI.me()
         .then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
@@ -45,7 +45,7 @@ export const login = (email, password, rememberMe) => (dispatch) => {
             if (data.resultCode === 0) {
                 dispatch(getAuthUserData())
             } else {
-                let message= data.messages ? data.messages[0] : 'some error'
+                let message = data.messages ? data.messages[0] : 'some error'
                 dispatch(stopSubmit('login', {_error: message}))
             }
         })

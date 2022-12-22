@@ -27,8 +27,6 @@ class App extends React.Component {
             return <Preloader/>
         }
 
-        console.log('App rendered')
-
         return (
             <BrowserRouter>
                 <div className="app-wrapper">
