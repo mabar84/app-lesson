@@ -29,7 +29,6 @@ export const profileAPI = {
             .then(response => response.data)
     },
     updateUserStatus(status) {
-        console.log('Go to update')
         return instance.put(`profile/status/`, {status: status})
             .then(response => response.data)
     },
