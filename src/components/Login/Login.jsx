@@ -9,9 +9,9 @@ import s from './../common/FormsControls/FormsControls.module.css';
 
 const maxLength = maxLengthCreator(30)
 
-let LoginForm = (props) => {
+let LoginForm = ({handleSubmit,error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Field elem={'input'} component={FormField} placeholder={'email'}
                        name={'email'} validate={[required, maxLength]}
@@ -27,7 +27,7 @@ let LoginForm = (props) => {
                 <span>remember me</span>
             </div>
             <div>
-                {props.error && <p className={s.summaryError}>{props.error}</p>}
+                {error && <p className={s.summaryError}>{error}</p>}
                 <button type="submit">Login</button>
             </div>
         </form>
@@ -36,12 +36,12 @@ let LoginForm = (props) => {
 
 LoginForm = reduxForm({form: 'login'})(LoginForm)
 
-const Login = (props) => {
+const Login = ({login,isAuth}) => {
     const onSubmit = (formData) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe)
     }
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Navigate to={'/profile'}/>
     }
 
