@@ -12,7 +12,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import {compose} from 'redux';
-import {connect} from 'react-redux';
+import {connect, Provider} from 'react-redux';
 import store from './redux/redux-store';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
@@ -22,6 +22,7 @@ class App extends React.Component {
     componentDidMount() {
         this.props.initializeApp()
     }
+
     render() {
         if (!this.props.initialized) {
             return <Preloader/>
@@ -56,8 +57,21 @@ const mapStateToProps = (state) => ({
     store: store
 })
 
-export default compose(
+const AppContainer = compose(
     connect(mapStateToProps,
         {initializeApp})
 )
 (App)
+
+
+const SocialNetworkApp = (props) => {
+    return         <Provider store={store}>
+        {/*<React.StrictMode>*/}
+        {/*<BrowserRouter>*/}
+            <AppContainer/>
+        </Provider>
+    // </BrowserRouter>
+    /*</React.StrictMode>*/
+}
+
+export default SocialNetworkApp
