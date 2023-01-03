@@ -14,10 +14,17 @@ let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portion
     let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
     let rightPortionPageNumber = portionNumber * portionSize
 
+    const prevClickHandler = () => {
+        setPortionNumber(portionNumber - 1)
+        onPageChanged(portionSize * (portionNumber - 2) + 1)
+    }
+    const nextClickHandler = () => {
+        setPortionNumber(portionNumber + 1)
+        onPageChanged(portionSize * portionNumber + 1)
+    }
+
     return <div>
-        {<button disabled={portionNumber <= 1} onClick={() => {
-            setPortionNumber(portionNumber - 1)
-        }}> Prev </button>}
+        {<button disabled={portionNumber <= 1} onClick={prevClickHandler}> Prev </button>}
         {pages.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
             .map(p => {
                 return <React.Fragment key={p}>
@@ -31,9 +38,7 @@ let Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portion
                     <span> </span>
                 </React.Fragment>
             })}
-        {<button disabled={portionCount <= portionNumber} onClick={() => {
-            setPortionNumber(portionNumber + 1)
-        }}> Next </button>}
+        {<button disabled={portionCount <= portionNumber} onClick={nextClickHandler}> Next </button>}
     </div>
 }
 
