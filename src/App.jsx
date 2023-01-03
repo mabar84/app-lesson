@@ -2,11 +2,11 @@ import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import News from './components/News/News';
+// import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -16,6 +16,11 @@ import {connect, Provider} from 'react-redux';
 import store from './redux/redux-store';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
+
+// const Navbar = React.lazy(() => import ('./components/Navbar/Navbar'));
+const DialogsContainer = React.lazy(() => import ('./components/Dialogs/DialogsContainer'));
+const News = React.lazy(() => import ('./components/News/News'));
+
 
 class App extends React.Component {
 
@@ -34,17 +39,20 @@ class App extends React.Component {
                     <HeaderContainer/>
                     <Navbar store={this.props.store}/>
                     <div className="app-wrapper-content">
-                        <Routes>
-                            <Route path="/profile/:id" element={<ProfileContainer/>}/>
-                            <Route path="/profile" element={<ProfileContainer/>}/>
-                            <Route path="/dialogs" element={<DialogsContainer/>}/>
-                            <Route path="/users" element={<UsersContainer/>}/>
-                            <Route path="/news" element={<News/>}/>
-                            <Route path="/music" element={<Music/>}/>
-                            <Route path="/settings" element={<Settings/>}/>
-                            <Route path="/friends" element={<Friends/>}/>
-                            <Route path="/login" element={<Login/>}/>
-                        </Routes>
+                        <React.Suspense fallback={<Preloader/>}>
+                            <Routes>
+                                <Route path="/profile/:id" element={<ProfileContainer/>}/>
+                                <Route path="/profile" element={<ProfileContainer/>}/>
+                                <Route path="/dialogs" element={<DialogsContainer/>}/>
+                                <Route path="/users" element={<UsersContainer/>}/>
+                                <Route path="/news" element={<News/>}/>
+                                <Route path="/music" element={<Music/>}/>
+                                <Route path="/settings" element={<Settings/>}/>
+                                <Route path="/friends" element={<Friends/>}/>
+                                <Route path="/login" element={<Login/>}/>
+                            </Routes>
+                        </React.Suspense>
+
                     </div>
                 </div>
             </BrowserRouter>
@@ -65,11 +73,11 @@ const AppContainer = compose(
 
 
 const SocialNetworkApp = (props) => {
-    return         <Provider store={store}>
+    return <Provider store={store}>
         {/*<React.StrictMode>*/}
         {/*<BrowserRouter>*/}
-            <AppContainer/>
-        </Provider>
+        <AppContainer/>
+    </Provider>
     // </BrowserRouter>
     /*</React.StrictMode>*/
 }
