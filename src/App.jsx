@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {HashRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 // import News from './components/News/News';
@@ -34,7 +34,7 @@ class App extends React.Component {
         }
 
         return (
-            <BrowserRouter>
+            <HashRouter basename="/">
                 <div className="app-wrapper">
                     <HeaderContainer/>
                     <Navbar store={this.props.store}/>
@@ -55,7 +55,7 @@ class App extends React.Component {
 
                     </div>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         )
     }
 }
