@@ -6,6 +6,7 @@
 }
 
 .avatar {
-    width: 25vw;
+    width: 10vw;
+    /*border-radius: 50%;*/
     object-fit: cover;
 }
