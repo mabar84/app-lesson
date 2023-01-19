@@ -10,3 +10,29 @@
     /*border-radius: 50%;*/
     object-fit: cover;
 }
+
+.contact {
+    padding-left: 15px;
+}
+
+.flex {
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.formControl textarea, .formControl input {
+    outline: none;
+}
+
+.formControl.error input, .formControl.error textarea {
+    border: 2px solid red;
+}
+
+.formControl2 {
+    color: red;
+}
+
+.summaryError {
+    color: red;
+}

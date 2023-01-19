@@ -1,4 +1,5 @@
 import {profileAPI} from '../api/api';
+import {stopSubmit} from "redux-form";
 
 let initialState = {
     posts: [
@@ -64,6 +65,23 @@ export const savePhoto = (file) => {
         const response = await profileAPI.savePhoto(file)
         if (response.resultCode === 0) {
             dispatch(savePhotoSuccess(response.data.photos))
+        }
+    }
+}
+export const saveProfile = (profile) => {
+    return async (dispatch, getState) => {
+        //const userId = getState().auth.id
+        const response = await profileAPI.saveProfile(profile)
+
+        if (response.data.resultCode === 0) {
+            //диспатчу в BLL данные профиля
+            dispatch(setUserProfile(profile))
+            // диспатчим запрос данных профился с сервера, так правильнее, страндартный flow, но дольше
+            // dispatch(getUserProfile(userId))
+        } else {
+            // dispatch(stopSubmit('edit-profile', {'contacts': {'facebook': response.data.messages[0]}}))
+            dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
+            return Promise.reject()
         }
     }
 }

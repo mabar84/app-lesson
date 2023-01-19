@@ -18,6 +18,29 @@ export const usersAPI = {
         return instance.delete(`follow/${userId}`)
     }
 }
+// Example
+const prof = {
+    "aboutMe": 'qwe9.00',
+    "contacts": {
+        "facebook": null,
+        "website": null,
+        "vk": null,
+        "twitter": null,
+        "instagram": null,
+        "youtube": null,
+        "github": null,
+        "mainLink": null
+    },
+    "lookingForAJob": false,
+    "lookingForAJobDescription": '???',
+    "fullName": "mabaron",
+    "userId": 26454,
+    "photos": {
+        "small": "https://social-network.samuraijs.com/activecontent/images/users/26454/user-small.jpg?v=22",
+        "large": "https://social-network.samuraijs.com/activecontent/images/users/26454/user.jpg?v=22"
+    }
+}
+
 
 export const profileAPI = {
     getProfile(userId = 2) {
@@ -40,6 +63,10 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         }).then(response => response.data)
+    },
+    saveProfile(profile) {
+        return instance.put('profile/', profile)
+        // .then(response => response.data)
     },
 }
 
