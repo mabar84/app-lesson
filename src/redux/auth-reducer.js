@@ -41,12 +41,15 @@ export const getAuthUserData = () => async (dispatch) => {
     }
 }
 export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+
     const response = await authAPI.login(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {
         // success, get auth data
         dispatch(getAuthUserData())
     } else {
-        if (response.data.resultCode === 10) {
+        console.log(response)
+
+        if (response.resultCode === 10) {
             dispatch(getCaptchaUrl())
         }
 
