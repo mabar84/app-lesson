@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, Route, Routes} from 'react-router-dom';
+import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 // import News from './components/News/News';
@@ -24,8 +24,19 @@ const News = React.lazy(() => import ('./components/News/News'));
 
 class App extends React.Component {
 
+    catchAllUnhandledErrors = (reason, promise) => {
+        console.log(reason)
+        console.log(promise)
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -50,6 +61,9 @@ class App extends React.Component {
                                 <Route path="/settings" element={<Settings/>}/>
                                 <Route path="/friends" element={<Friends/>}/>
                                 <Route path="/login" element={<Login/>}/>
+                                <Route path="/" element={<Navigate to="/profile"/>}/>
+                                <Route path="*" element={<div>404</div>}/>
+
                             </Routes>
                         </React.Suspense>
 
