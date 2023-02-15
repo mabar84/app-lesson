@@ -37,22 +37,22 @@ let initialState: DialogsReducerType = {
 }
 
 type DialogsReducerType = {
-    dialogsData: DialogsDataType,
+    dialogsData: DialogsDataType
     messagesData: MessagesDataType
 }
 
 type MessagesDataType = Array<{
-    id: number,
+    id: number
     message: string
 }>
 
 type DialogsDataType = Array<{
-    id: number,
-    name: string,
+    id: number
+    name: string
     src: string
 }>
 
-const dialogsReducer = (state = initialState, action: AddMessageCreatorActionType) => {
+const dialogsReducer = (state = initialState, action: DialogsReducerActionType) => {
     switch (action.type) {
         case ADD_MESSAGE:
             return {
@@ -68,7 +68,8 @@ export const addMessageCreator = (newMessage: string) => ({type: ADD_MESSAGE, ne
 
 export default dialogsReducer;
 
-type AddMessageCreatorActionType = {
-    type: string,
+type DialogsReducerActionType = {
+    type: string
     newMessage: string
 }
+

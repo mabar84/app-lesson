@@ -8,7 +8,7 @@ import ProfileDataForm from "./ProfileDataForm";
 
 const ProfileInfo = ({profile, status, updateUserStatus, isOwner, savePhoto, saveProfile}) => {
     const [editMode, setEditMode] = useState()
-
+    console.log(profile)
     if (!profile) {
         return <Preloader/>
     }
@@ -51,8 +51,9 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
         <p><b>Full name:</b> {profile.fullName}</p>
         <p><b>About me:</b> {profile.aboutMe ? profile.aboutMe : 'while empty'}</p>
         <b>Contacts:</b> {Object.keys(profile.contacts).map((el) => {
-        return <Contact contactTitle={el} contactValue={profile.contacts[el]} key={el}/>
-    })}
+            return <Contact contactTitle={el} contactValue={profile.contacts[el]} key={el}/>
+        }
+    )}
 
         <b>Looking for a job:</b> {profile.lookingForAJob ? 'Yes' : 'No'}
         <br/>

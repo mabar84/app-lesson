@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@types/redux-form": "^8.3.5",
     "gh-pages": "^4.0.0",
     "react-test-renderer": "18.1.0"
   }
