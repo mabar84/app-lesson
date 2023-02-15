@@ -22,9 +22,9 @@ const DialogsContainer = React.lazy(() => import ('./components/Dialogs/DialogsC
 const News = React.lazy(() => import ('./components/News/News'));
 
 
-class App extends React.Component {
+class App extends React.Component<any> {
 
-    catchAllUnhandledErrors = (reason, promise) => {
+    catchAllUnhandledErrors = (reason: any, promise: any) => {
         console.log(reason)
         console.log(promise)
     }
@@ -32,11 +32,11 @@ class App extends React.Component {
     componentDidMount() {
         this.props.initializeApp()
 
-        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+        // window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     componentWillUnmount() {
-        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+        // window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -74,7 +74,7 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     initialized: state.app.initialized,
     store: store
 })
@@ -86,7 +86,7 @@ const AppContainer = compose(
 (App)
 
 
-const SocialNetworkApp = (props) => {
+const SocialNetworkApp = () => {
     return <Provider store={store}>
         {/*<React.StrictMode>*/}
         {/*<BrowserRouter>*/}
