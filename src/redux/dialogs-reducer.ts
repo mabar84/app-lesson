@@ -41,10 +41,12 @@ type DialogsReducerType = {
     messagesData: MessagesDataType
 }
 
-type MessagesDataType = Array<{
+export type MessagesDataType = Array<MessageType>
+
+export type MessageType = {
     id: number
     message: string
-}>
+}
 
 type DialogsDataType = Array<{
     id: number

@@ -6,16 +6,17 @@ import {Navigate} from 'react-router-dom';
 import {Field, reduxForm} from 'redux-form';
 import {FormField} from '../common/FormsControls/FormsControls';
 import {maxLengthCreator, required} from '../../utilites/validators/validators';
+import {MessageType} from "../../redux/dialogs-reducer";
 
-const Dialogs = (props) => {
+const Dialogs = (props: any) => {
 
     let state = props.dialogsPage
 
-    let messages = state.messagesData.map((m, index) => (
+    let messages = state.messagesData.map((m: MessageType, index: number) => (
         <Messages message={m.message} id={m.id} key={index}/>
     ));
 
-    const onSubmit = (values) => {
+    const onSubmit = (values: any) => {
         props.sendMessage(values.newMessage)
         values.newMessage = ''
     };
@@ -30,7 +31,7 @@ const Dialogs = (props) => {
 
             <div className={s.messages}>
                 {messages}
-                <DialogsForm onSubmit={onSubmit}/>
+                <DialogsReduxForm onSubmit={onSubmit}/>
             </div>
         </div>
     );
@@ -38,7 +39,7 @@ const Dialogs = (props) => {
 
 const maxLength = maxLengthCreator(8)
 
-let DialogsForm = (props) => {
+let DialogsForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <Field elem={'textarea'} component={FormField} placeholder={'your message'} cols="30" rows="10"
@@ -52,6 +53,6 @@ let DialogsForm = (props) => {
         </form>)
 }
 
-DialogsForm = reduxForm({form: 'newMessageForm'})(DialogsForm)
+let DialogsReduxForm = reduxForm({form: 'newMessageForm'})(DialogsForm)
 
 export default Dialogs;
