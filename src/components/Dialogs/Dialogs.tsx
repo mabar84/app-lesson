@@ -8,7 +8,7 @@ import {FormField} from '../common/FormsControls/FormsControls';
 import {maxLengthCreator, required} from '../../utilites/validators/validators';
 import {MessageType} from "../../redux/dialogs-reducer";
 
-const Dialogs = (props: any) => {
+const Dialogs: React.FunctionComponent<any> = (props) => {
 
     let state = props.dialogsPage
 

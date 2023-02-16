@@ -4,15 +4,15 @@ import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
-        sendMessage: (newMessage) => {
+        sendMessage: (newMessage: string) => {
             dispatch(addMessageCreator(newMessage))
         }
     }
@@ -20,5 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect,
-)(Dialogs)
+    withAuthRedirect
+)
+    // @ts-ignore
+    (Dialogs)
